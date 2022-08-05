@@ -54,21 +54,6 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @return {WPElement} Element to render.
  */
-// const ALLOWED_MEDIA_TYPES = ['image'];
-// function MediaUploaderSystem({mediaID,onSelect}){
-// 	return (
-// 		<MediaUploadCheck>
-// 			<MediaUpload 
-// 				onSelect={onSelect}
-// 				allowedTypes={ALLOWED_MEDIA_TYPES}
-// 				value={mediaID}
-// 				render={({open}) => (
-// 					<Button onClick={open}>{'Add Image'}</Button>
-// 				)}
-// 			/>
-// 		</MediaUploadCheck>
-// 	)
-// }
 
 function Edit(_ref) {
   let {
@@ -84,20 +69,35 @@ function Edit(_ref) {
     });
   };
 
+  const onRemoveImg = () => {
+    setAttributes({
+      imgURL: null,
+      imgID: null,
+      imgALT: null
+    });
+  };
+
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "mediaWrapper"
-  }, attributes.imgURL ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    className: "media-wrapper"
+  }, attributes.imgURL ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "img-upload-wrapper"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: attributes.imgURL,
     alt: attributes.imgALT,
     height: "200",
     width: "200"
-  }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.IconButton, {
+    icon: "minus",
+    onClick: onRemoveImg
+  }, "Remove Image")) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
     onSelect: onFileSelect,
+    value: attributes.imgID,
     render: _ref2 => {
       let {
         open
       } = _ref2;
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.IconButton, {
+        icon: "plus",
         onClick: open
       }, "Add Image");
     }

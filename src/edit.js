@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
 import { useBlockProps,MediaUploadCheck,RichText,MediaUpload } from '@wordpress/block-editor';
-import {Button} from '@wordpress/components';
+import {Button,IconButton} from '@wordpress/components';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -30,22 +30,6 @@ import './editor.scss';
  * @return {WPElement} Element to render.
  */
 
-// const ALLOWED_MEDIA_TYPES = ['image'];
-// function MediaUploaderSystem({mediaID,onSelect}){
-// 	return (
-// 		<MediaUploadCheck>
-// 			<MediaUpload 
-// 				onSelect={onSelect}
-// 				allowedTypes={ALLOWED_MEDIA_TYPES}
-// 				value={mediaID}
-// 				render={({open}) => (
-// 					<Button onClick={open}>{'Add Image'}</Button>
-// 				)}
-// 			/>
-// 		</MediaUploadCheck>
-// 	)
-// }
-
 export default function Edit({attributes,setAttributes}) {
 	const onFileSelect = (img) => {
 		setAttributes({
@@ -54,26 +38,43 @@ export default function Edit({attributes,setAttributes}) {
 			imgALT:img.alt
 		})
 	}
+	const onRemoveImg = () => {
+		setAttributes({
+			imgURL:null,
+			imgID:null,
+			imgALT:null
+		})
+	}
 	return (
 		<div>
-			<div className='mediaWrapper'>
+			<div className='media-wrapper'>
 			{
 				(attributes.imgURL) ? (
-					<img 
-						src    = {attributes.imgURL}
-						alt    = {attributes.imgALT}
-						height = '200'
-						width  = '200'
-					/>
+					<div className='img-upload-wrapper'>
+						<img 
+							src    = {attributes.imgURL}
+							alt    = {attributes.imgALT}
+							height = '200'
+							width  = '200'
+						/>
+						<IconButton
+							icon    = "minus"
+							onClick = {onRemoveImg}
+						>
+						Remove Image
+						</IconButton>
+					</div>
 				): (
 					<MediaUpload 
-						onSelect={onFileSelect}
-						render={({open}) => 
-							<Button
+						onSelect = {onFileSelect}
+						value    = {attributes.imgID}
+						render   = {({open}) => 
+							<IconButton
+								icon    = "plus"
 								onClick = {open}
 							>
 							Add Image
-							</Button>
+							</IconButton>
 						}
 					/>
 				)
