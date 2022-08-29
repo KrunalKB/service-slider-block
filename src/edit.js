@@ -11,8 +11,8 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { useBlockProps,MediaUploadCheck,RichText,MediaUpload } from '@wordpress/block-editor';
-import {Button,IconButton} from '@wordpress/components';
+import { useBlockProps,InspectorControls,RichText,MediaUpload,ColorPalette } from '@wordpress/block-editor';
+import {PanelBody,IconButton,RangeControl} from '@wordpress/components';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -46,7 +46,42 @@ export default function Edit({attributes,setAttributes}) {
 		})
 	}
 	return (
-		<div>
+		<>
+		<InspectorControls>
+			<PanelBody title = {'Title Settings'} initialOpen = {false}>
+				<p><strong>Font Size</strong></p>
+				<RangeControl
+					value    = { attributes.titleFontSize }
+					onChange = { (titleFontSize) => setAttributes( { titleFontSize } ) }
+					min      = { 0 }
+					max      = { 100 }
+					step     = { 2 }
+				/>
+
+				<p><strong>Color</strong></p>
+				<ColorPalette 
+					value    = { attributes.titleColor }
+					onChange = { (titleColor) => setAttributes( { titleColor } )} />
+			</PanelBody>
+
+			<PanelBody title = {'Description Settings'} initialOpen = {false}>
+				<p><strong>Font Size</strong></p>
+				<RangeControl
+					value    = { attributes.descriptionFontSize }
+					onChange = { (descriptionFontSize) => setAttributes( { descriptionFontSize } ) }
+					min      = { 0 }
+					max      = { 100 }
+					step     = { 2 }
+				/>
+
+				<p><strong>Color</strong></p>
+				<ColorPalette 
+					value    = { attributes.descriptionColor }
+					onChange = { (descriptionColor) => setAttributes( { descriptionColor } )} />
+			</PanelBody>
+		</InspectorControls>
+
+		<div {...useBlockProps()}>
 			<div className='media-wrapper'>
 			{
 				(attributes.imgURL) ? (
@@ -57,6 +92,7 @@ export default function Edit({attributes,setAttributes}) {
 							height = '200'
 							width  = '200'
 						/>
+						<br />
 						<IconButton
 							icon    = "minus"
 							onClick = {onRemoveImg}
@@ -82,19 +118,22 @@ export default function Edit({attributes,setAttributes}) {
 			</div>
 
 			<RichText
+				className	='service-title'
 				tagName     = 'h2'
 				placeholder = 'Enter Service Title'
 				value       = { attributes.title }
 				onChange    = { (title) => setAttributes( { title } ) }
-				style       = {{ color: attributes.titleColor }}
+				style       = {{ color : attributes.titleColor, fontSize : attributes.titleFontSize }}
 			/>
 			<RichText
+				className	='service-description'
 				tagName     = 'p'
 				placeholder = 'Enter Service Description'
 				value       = { attributes.description }
 				onChange    = { (description) => setAttributes( { description } ) }
-				style       = {{ color: attributes.descriptionColor }}
+				style       = {{ color : attributes.descriptionColor, fontSize : attributes.descriptionFontSize }}
 			/>
 		</div>
+		</>
 	);
 }

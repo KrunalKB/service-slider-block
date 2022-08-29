@@ -36,12 +36,12 @@ export default function save(props) {
 			<RichText.Content 
 				tagName = 'h2'
 				value   = {props.attributes.title}
-				style   = {{color:props.attributes.titleColor}}
+				style   = {{color : props.attributes.titleColor, fontSize : props.attributes.titleFontSize}}
 			/>
 			<RichText.Content 
 				tagName = 'p'
 				value   = {props.attributes.description}
-				style   = {{color:props.attributes.descriptionColor}}
+				style   = {{color : props.attributes.descriptionColor, fontSize : props.attributes.descriptionFontSize}}
 			/>
 		</div>
 	);

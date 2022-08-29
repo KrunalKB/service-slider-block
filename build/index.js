@@ -77,7 +77,39 @@ function Edit(_ref) {
     });
   };
 
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: 'Title Settings',
+    initialOpen: false
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, "Font Size")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    value: attributes.titleFontSize,
+    onChange: titleFontSize => setAttributes({
+      titleFontSize
+    }),
+    min: 0,
+    max: 100,
+    step: 2
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, "Color")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+    value: attributes.titleColor,
+    onChange: titleColor => setAttributes({
+      titleColor
+    })
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: 'Description Settings',
+    initialOpen: false
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, "Font Size")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    value: attributes.descriptionFontSize,
+    onChange: descriptionFontSize => setAttributes({
+      descriptionFontSize
+    }),
+    min: 0,
+    max: 100,
+    step: 2
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, "Color")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+    value: attributes.descriptionColor,
+    onChange: descriptionColor => setAttributes({
+      descriptionColor
+    })
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)(), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "media-wrapper"
   }, attributes.imgURL ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "img-upload-wrapper"
@@ -86,7 +118,7 @@ function Edit(_ref) {
     alt: attributes.imgALT,
     height: "200",
     width: "200"
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.IconButton, {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.IconButton, {
     icon: "minus",
     onClick: onRemoveImg
   }, "Remove Image")) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
@@ -102,6 +134,7 @@ function Edit(_ref) {
       }, "Add Image");
     }
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+    className: "service-title",
     tagName: "h2",
     placeholder: "Enter Service Title",
     value: attributes.title,
@@ -109,9 +142,11 @@ function Edit(_ref) {
       title
     }),
     style: {
-      color: attributes.titleColor
+      color: attributes.titleColor,
+      fontSize: attributes.titleFontSize
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+    className: "service-description",
     tagName: "p",
     placeholder: "Enter Service Description",
     value: attributes.description,
@@ -119,9 +154,10 @@ function Edit(_ref) {
       description
     }),
     style: {
-      color: attributes.descriptionColor
+      color: attributes.descriptionColor,
+      fontSize: attributes.descriptionFontSize
     }
-  }));
+  })));
 }
 
 /***/ }),
@@ -281,13 +317,15 @@ function save(props) {
     tagName: "h2",
     value: props.attributes.title,
     style: {
-      color: props.attributes.titleColor
+      color: props.attributes.titleColor,
+      fontSize: props.attributes.titleFontSize
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, {
     tagName: "p",
     value: props.attributes.description,
     style: {
-      color: props.attributes.descriptionColor
+      color: props.attributes.descriptionColor,
+      fontSize: props.attributes.descriptionFontSize
     }
   }));
 }
